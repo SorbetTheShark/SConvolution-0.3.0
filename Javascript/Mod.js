@@ -102,11 +102,8 @@ function getPointGen() {
 }
 
 setInterval(function() {
-	player.cX = (Math.sin(player.timePlayed) * (Math.random() * 2)) * (Math.cos(player.timePlayed) * (Math.random() * 2))
-	player.cY = (Math.cos(player.timePlayed) * (Math.random() * 2)) * (Math.sin(player.timePlayed) * (Math.random() * 2))
-
-	displayThings = [
-	]
+	player.cX = (new Decimal(player.timePlayed).sin().times(new Decimal(Math.random() * 2))).times(new Decimal((Math.cos(player.timePlayed))).times(new Decimal(Math.random() * 2)))
+	player.cY = (new Decimal(player.timePlayed).cos().times(new Decimal(Math.random() * 2))).times(new Decimal((Math.sin(player.timePlayed))).times(new Decimal(Math.random() * 2)))
 
 	if (devMode == true) {
 		player.devSpeed = new Decimal(10)
