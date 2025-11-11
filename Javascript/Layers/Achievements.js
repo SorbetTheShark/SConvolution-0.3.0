@@ -68,6 +68,14 @@ addLayer("ach", {
             onComplete() {player.ach.points = player.ach.points.add(4)}
         },
 
+        15: {
+            name: "Viginti-<br>llionaire",
+            done() {return player.money.points.gte("e63")},
+            unlocked() {return hasMilestone("universe", 28)},
+            tooltip: "Reach 1.00e63 Money <br><br> (5 AP)",
+            onComplete() {player.ach.points = player.ach.points.add(5)}
+        },
+
         21: {
             name: "Sun",
             done() {return player.booster.points.gte(5)},
@@ -98,6 +106,30 @@ addLayer("ach", {
             unlocked() {return hasMilestone("universe", 20)},
             tooltip: "Reach 35 Boosters <br><br> (4 AP)",
             onComplete() {player.ach.points = player.ach.points.add(4)}
+        },
+
+        31: {
+            name: "C",
+            done() {return player.sorbet.points.gte(25000)},
+            unlocked() {return player.sorbet.unlocked},
+            tooltip() {return `Reach 25,000 ${temp.sorbet.resource} <br><br> (1 AP)`},
+            onComplete() {player.ach.points = player.ach.points.add(1)}
+        },
+
+        32: {
+            name: "O",
+            done() {return player.sorbet.points.gte("e6")},
+            unlocked() {return hasMilestone("universe", 27)},
+            tooltip() {return `Reach 1,000,000 ${temp.sorbet.resource} <br><br> (2 AP)`},
+            onComplete() {player.ach.points = player.ach.points.add(2)}
+        },
+
+        33: {
+            name: "L",
+            done() {return player.sorbet.points.gte("e17")},
+            unlocked() {return hasMilestone("universe", 28)},
+            tooltip() {return `Reach 1.00e17 ${temp.sorbet.resource} <br><br> (3 AP)`},
+            onComplete() {player.ach.points = player.ach.points.add(3)}
         }
     },
 
@@ -114,6 +146,13 @@ addLayer("ach", {
             effectDescription: "The first booster effect's softcap starts 5,000 later.",
             done() {return player.ach.points.gte(10)},
             unlocked() {return hasMilestone("universe", 18)}
+        },
+
+        13: {
+            requirementDescription: "20 Achievement Points",
+            effectDescription: "Point gain is tripled and divide booster costs by 10.",
+            done() {return player.ach.points.gte(20)},
+            unlocked() {return hasMilestone("universe", 27)}
         }
     },
 
@@ -122,7 +161,7 @@ addLayer("ach", {
             direction: RIGHT,
             width: 600,
             height: 50,
-            progress() {return player.ach.points.div(20)},
+            progress() {return player.ach.points.div(31)},
             display() {return `Progress to 100% game completion: ${format(this.progress().times(100))}%`},
             fillStyle() {return {'background-color': '#F2E279'}},
             borderStyle() {return {'border-color': '#E0D060', 'border-radius': '50px'}}

@@ -6,10 +6,20 @@ var layoutInfo = {
     treeLayout: [
         ["universe", "ach"],
         ["money"],
-        ["booster"]
+        ["booster", "sorbet"]
     ]
 
     
+}
+
+function treeSetups() {
+	let base = [
+		["universe", "ach"],
+		["money"],
+		["booster", "sorbet"]
+	]
+
+	layoutInfo.treeLayout = base
 }
 
 addNode("null", {

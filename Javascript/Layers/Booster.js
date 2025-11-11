@@ -33,7 +33,7 @@ addLayer("booster", {
     exponent: 1.250,
     roundUpCost: true,
     update() {
-        player.booster.buffList = [new Decimal(1), new Decimal(1), new Decimal(1)]
+        player.booster.buffList = [new Decimal(1), new Decimal(1), new Decimal(1), new Decimal(1)]
         player.booster.buffDisplay = ``
 
         // Buff 01
@@ -55,14 +55,16 @@ addLayer("booster", {
             if (hasMilestone("universe", 22)) softcapLimit = softcapLimit.times(10)
             if (hasUpgrade("booster", 24)) softcapLimit = softcapLimit.times(100)
             if (hasUpgrade("booster", 41)) softcapLimit = softcapLimit.times(new Decimal(10).pow(0.8))
+            if (hasUpgrade("sorbet", 41)) softcapLimit = softcapLimit.times(new Decimal(10).pow(2.5))
 
             if (player.booster.buffList[0].gte(softcapLimit)) player.booster.buffList[0] = new Decimal(softcapLimit).add(player.booster.buffList[0].sub(softcapLimit).pow(softcapPower))
 
             if (hasUpgrade("booster", 21)) player.booster.buffList[0] = player.booster.buffList[0].times(upgradeEffect("booster", 21))
+            if (hasMilestone("permastones", 1002)) player.booster.buffList[0] = player.booster.buffList[0].pow(1.1)
 
             player.booster.buffDisplay += `x${format(player.booster.buffList[0])} <crimson>Points</crimson> <small>(Softcaps at ${formatWhole(softcapLimit)} multiplier)</small> <br> <small style="color:gray">Softcap Power: ${formatWhole(softcapLimit)} + (x - ${formatWhole(softcapLimit)})<sup>${format(softcapPower)}</small> <br> <small style="color:gray"> Effect Power: ${format(powBase)} </small><br><br>`
         } else {
-            player.booster.buffDisplay += `<h3> Boost Unlocks at Universe 8`
+            player.booster.buffDisplay += `<h3> Boost Unlocks at Universe 8 <br>`
         }
 
         // Buff 02
@@ -84,6 +86,7 @@ addLayer("booster", {
             if (hasMilestone("universe", 22)) softcapLimit = softcapLimit.times(10)
             if (hasUpgrade("booster", 24)) softcapLimit = softcapLimit.times(100)
             if (hasUpgrade("booster", 41)) softcapLimit = softcapLimit.times(new Decimal(10).pow(0.8))
+             if (hasUpgrade("sorbet", 41)) softcapLimit = softcapLimit.times(new Decimal(10).pow(2.5))
 
             if (player.booster.buffList[1].gte(softcapLimit)) player.booster.buffList[1] = new Decimal(softcapLimit).add(player.booster.buffList[1].sub(softcapLimit).pow(softcapPower))
 
@@ -91,7 +94,7 @@ addLayer("booster", {
 
             player.booster.buffDisplay += `x${format(player.booster.buffList[1])} <crimson>Funds</crimson> <small>(Softcaps at ${formatWhole(softcapLimit)} multiplier)</small> <br> <small style="color:gray">Softcap Power: ${formatWhole(softcapLimit)} + (x - ${formatWhole(softcapLimit)})<sup>${format(softcapPower)}</small> <br> <small style="color:gray"> Effect Power: ${format(powBase)} </small> <br><br>`
         } else {
-            player.booster.buffDisplay += `<h3> Boost Unlocks at Universe 9`
+            player.booster.buffDisplay += `<h3> Boost Unlocks at Universe 9 <br>`
         }
 
         // Buff 03
@@ -112,14 +115,35 @@ addLayer("booster", {
             if (hasUpgrade("booster", 24)) softcapLimit = softcapLimit.times(100)
             if (hasMilestone("universe", 23)) softcapLimit = softcapLimit.div(new Decimal(10).pow(1.5))
             if (hasUpgrade("booster", 41)) softcapLimit = softcapLimit.times(new Decimal(10).pow(0.8))
+            if (hasUpgrade("sorbet", 21)) softcapLimit = softcapLimit.times(new Decimal(10).pow(1.85))
+             if (hasUpgrade("sorbet", 41)) softcapLimit = softcapLimit.times(new Decimal(10).pow(2.5))
 
             if (player.booster.buffList[2].gte(softcapLimit)) player.booster.buffList[2] = new Decimal(softcapLimit).add(player.booster.buffList[2].sub(softcapLimit).pow(softcapPower))
             
             if (hasUpgrade("booster", 33)) player.booster.buffList[2] = player.booster.buffList[2].times(upgradeEffect("booster", 21))
 
-            player.booster.buffDisplay += `/${format(player.booster.buffList[2])} <crimson>Booster Cost</crimson> <small>(Softcaps at ${formatWhole(softcapLimit)} multiplier)</small> <br> <small style="color:gray">Softcap Power: ${formatWhole(softcapLimit)} + (x - ${formatWhole(softcapLimit)})<sup>${format(softcapPower)}</small> <br> <small style="color:gray"> Effect Power: ${format(powBase)} </small> <br>`
+            player.booster.buffDisplay += `/${format(player.booster.buffList[2])} <crimson>Booster Cost</crimson> <small>(Softcaps at ${formatWhole(softcapLimit)} multiplier)</small> <br> <small style="color:gray">Softcap Power: ${formatWhole(softcapLimit)} + (x - ${formatWhole(softcapLimit)})<sup>${format(softcapPower)}</small> <br> <small style="color:gray"> Effect Power: ${format(powBase)} </small> <br><br>`
         } else {
-            player.booster.buffDisplay += `<h3> Boost Unlocks at Universe 11`
+            player.booster.buffDisplay += `<h3> Boost Unlocks at Universe 11 <br>`
+        }
+
+        // Buff 04
+        if (hasMilestone("universe", 30)) {
+            let amt = player.booster.points
+            let powBase = new Decimal(1.06)
+
+            player.booster.buffList[3] = powBase.pow(amt)
+
+            // Softcap
+            let softcapLimit = new Decimal(10000)
+            let softcapPower = new Decimal(0.11)
+
+            if (player.booster.buffList[3].gte(softcapLimit)) player.booster.buffList[3] = new Decimal(softcaplimit).add(player.booster.buffList[3].sub(softcapLimit).pow(softcapPower))
+            
+            player.booster.buffDisplay += `x${format(player.booster.buffList[3])}<crimson> ${temp.sorbet.resource} </crimson><small>(Softcaps at ${formatWhole(softcapLimit)} multiplier)</small><br> <small style="color:gray">Softcap Power: ${formatWhole(softcapLimit)} + (x - ${formatWhole(softcapLimit)})<sup>${format(softcapPower)}</sup></small><br><small style="color:gray"> Effect Power: ${format(powBase)}</small><br>`
+
+        } else {
+            player.booster.buffDisplay += `<h3> Boost Unlocks at Universe 30 <br>`
         }
 
         player.booster.buffDisplay2 = ``
@@ -218,6 +242,8 @@ addLayer("booster", {
                 if (hasUpgrade("booster", 23)) base = base.pow(1.25)
                 if (hasUpgrade("booster", 32)) base = base.pow(1.5)
                 if (hasUpgrade("booster", 41)) base = base.times(3)
+                if (hasUpgrade("sorbet", 24)) base = base.pow(1.33)
+                if (hasUpgrade("sorbet", 31)) base = base.pow(1.33)
                 return base
             },
             unlocked() {return hasMilestone("universe", 20) && hasUpgrade("booster", 14)}
@@ -232,6 +258,7 @@ addLayer("booster", {
                 if (hasUpgrade("booster", 23)) powBase = powBase.pow(1.25)
                 if (hasMilestone("universe", 24)) powBase = powBase.pow(2)
                 if (hasUpgrade("booster", 41)) powBase = powBase.pow(2)
+                if (hasUpgrade("sorbet", 42)) powBase = powBase.pow(1.2)
                 return powBase
             },
             unlocked() {return hasUpgrade("booster", 21)}
@@ -288,9 +315,13 @@ addLayer("booster", {
         let base = new Decimal(1)
         if (hasMilestone("universe", 20)) base = base.div(player.booster.buffList[2])
         if (hasMilestone("universe", 21)) base = base.times(1.05)
+        if (hasUpgrade("sorbet", 32)) base = base.div(upgradeEffect("sorbet", 32))
+        if (hasMilestone("ach", 13)) base = base.div(10)
+        if (hasMilestone("permastones", 1001)) base = base.div(2.25)
         return base
     },
     nodeStyle() {return {
         "transform":`translate(${player.cX * 15}px, ${player.cY * 15}px)`
-    }}
+    }},
+    canBuyMax() {return hasMilestone("universe", 28)}
 })

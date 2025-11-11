@@ -15,7 +15,7 @@ function jarbler(input, template = "abcdefghijklmnopqrstuvwxyz") {
     return output
 }
 
-doNotif("Possible Epilepsy Warning!1!1", "???", 10, "crimson")
+doNotif("Possible Epilepsy Warning!1!1", "SConvolution Warning", 10, "crimson")
 
 
 function themeSetter() {
@@ -42,13 +42,7 @@ function wait(ms) {
 function startleify(char) {
     switch (char) {
         case "Sorbet":
-            if (player.universe.points.lt(18)) {
-                doNotif("A-", "Sorbet", 5, "lightgray")
-            } else if (player.universe.points.lt(24)) {
-                doNotif("...Ah", "Sorbet", 5, "gray")
-            } else {
-                doNotif("*strange whistling noises*", "Sorbet", 6, "dimgray")
-            }
+            doNotif("A-", "Sorbet", 5, "lightgray")
             break;
     }
 }

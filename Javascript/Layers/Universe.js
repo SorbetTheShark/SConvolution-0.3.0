@@ -13,9 +13,15 @@ addLayer("universe", {
     update() {
         player.universe.buffDisplay = ""
         if (hasMilestone("universe", 14)) {
-            let base = player.universe.anger
+            let base = new Decimal(0)
+            if (hasMilestone("universe", 25)) {
+                base = player.universe.anger.times(player.universe.anger.log(10))
+            } else {
+                base = player.universe.anger
+            }
             if (hasMilestone("universe", 15)) base = base.pow(2)
             if (hasMilestone("universe", 18)) base = base.pow(2)
+            if (hasMilestone("universe", 27)) base = base.pow(1.4)
             player.universe.buffDisplay += `Total boost from <crimson>Milestone 4</crimson>: x${format(base)} Overflow Cost <br>`
         }
 
@@ -67,10 +73,18 @@ addLayer("universe", {
     clickables: {
         11: {
             display() {return "<h1/>Replay Universe 11 Speech"},
-            style: {"width":"600px", "height":"50px", "border-radius":"0"},
+            style: {"width":"600px", "height":"50px", "border-radius":"0", "margin":"5px"},
             canClick() {return player.universe.points.gte(10)},
             unlocked() {return this.canClick()},
             onClick() {doSpeech(1)}
+        },
+
+        12: {
+            display() {return "<h1/>Scare Sorbet"},
+            style: {"width":"600px", "height":"50px", "border-radius":"0", "margin":"5px"},
+            canClick() {return player.universe.points.gte(11)},
+            unlocked() {return this.canClick()},
+            onClick() {startleify("Sorbet")}
         }
     },
 
@@ -218,14 +232,85 @@ addLayer("universe", {
                 startleify("Sorbet")
             },
             unlocked() {return player.universe.points.gte(13)}
+        },
+
+        25: {
+            requirementDescription: "15 Destroyed Universes",
+            done() {return player.universe.points.gte(15)},
+            effectDescription() {return `Milestone 4's debuff scales faster. <br> <crazedCrimson style="text-shadow: ${player.cX}px ${player.cY}px 3px purple"/> Unlock Iteration 1 of Sorbet, therefore unlocking a new layer.`},
+            onComplete() {
+                player.universe.anger = player.universe.anger.times(2.5)
+                startleify("Sorbet")
+            },
+            unlocked() {return player.universe.points.gte(14)}
+        },
+
+        26: {
+            requirementDescription: "16 Destroyed Universes",
+            done() {return player.universe.points.gte(16)},
+            effectDescription() {return `Divide point gain by 25 and divide funding gain by 4. <br> <crazedCrimson style="text-shadow: ${player.cX}px ${player.cY}px 3px purple"/> Unlock an upgrade in Sorbet's Layer.`},
+            onComplete() {
+                player.universe.anger = player.universe.anger.times(2.6)
+                startleify("Sorbet")
+            },
+            unlocked() {return player.universe.points.gte(15)}
+        },
+
+        27: {
+            requirementDescription: "17 Destroyed Universes",
+            done() {return player.universe.points.gte(17)},
+            effectDescription() {return `Milestone 4's debuff scales much faster. <br><crazedCrimson style="text-shadow:${player.cX}px ${player.cY}px 3px purple"/> Unlock another row of Sorbet's upgrades.`},
+            onComplete() {
+                player.universe.anger = player.universe.anger.times(2.7),
+                startleify("Sorbet")
+            },
+            unlocked() {return player.universe.points.gte(16)}
+        },
+
+        28: {
+            requirementDescription: "18 Destroyed Universes",
+            done() {return player.universe.points.gte(18)},
+            effectDescription() {return `The first 2 sorbet upgrade's powers are 10% weaker. <br><crazedCrimson style="text-shadow:${player.cX}px ${player.cY}px 3px purple"/>Unlock the fourth row of Sorbet's upgrades and you can buy max boosters.`},
+            onComplete() {
+                player.universe.anger = player.universe.anger.times(2.8),
+                startleify("Sorbet")
+            },
+            unlocked() {return player.universe.points.gte(17)}
+        },
+
+        29: {
+            requirementDescription: "<small><small>28 Destroyed Universes (Got a long way going if you're seeing this for the first time)</small></small>",
+            done() {return player.universe.points.gte(28)},
+            effectDescription() {return `Milestone 4's effect is somewhat stronger. <br><crazedCrimson style="text-shadow:${player.cX}px ${player.cY}px 3px purple"/> Unlock Sorbet's last upgrade in the 4th row.`},
+            onComplete() {
+                player.universe.anger = player.universe.anger.times(3.8),
+                startleify("Sorbet")
+            },
+            unlocked() {return player.universe.points.gte(18)}
+        },
+
+        30: {
+            requirementDescription: "29 Destroyed Universes",
+            done() {return player.universe.points.gte(29)},
+            effectDescription() {return `Upgrade 2-3 in <nocturnalNavy>M Node</nocturnalNavy> is 20% weaker. <br><crazedCrimson style="text-shadow:${player.cX}px ${player.cY}px 3px purple"/> Unlock the 4th booster effect.`},
+            onComplete() {
+                player.universe.anger = player.universe.anger.times(3.9),
+                startleify("Sorbet")
+            },
+            unlocked() {return hasMilestone("universe", 29)}
         }
     },
     gainMult() {
         let base = new Decimal(1)
         if (hasMilestone("universe", 14)) {
-            base = base.times(player.universe.anger)
+            if (hasMilestone("universe", 25)) {
+                base = base.times(player.universe.anger.times(player.universe.anger.log(10)))
+            } else {
+                base = base.times(player.universe.anger)
+            }
             if (hasMilestone("universe", 15)) base = base.pow(2)
             if (hasMilestone("universe", 18)) base = base.pow(2)
+            if (hasMilestone("universe", 27)) base = base.pow(1.4)
         }
         return base
     },
@@ -239,5 +324,8 @@ addLayer("universe", {
             fillStyle() {return {'background-color':'#5A5A5A'}},
             borderStyle() {return {'border-color':'#404040', 'border-radius':'50px'}}
         }
+    },
+    onPrestige() {
+        player.points = new Decimal(0)
     }
 })

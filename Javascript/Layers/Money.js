@@ -79,6 +79,7 @@ addLayer("money", {
                 if (hasUpgrade("money", 51)) base = base.times(2)
                 if (hasMilestone("universe", 16)) base = base.times(buyableEffect("money", 12))
                 if (hasMilestone("universe", 19)) base = base.times(2)
+                if (hasUpgrade("sorbet", 11)) base = base.times(upgradeEffect("sorbet", 11))
                 return base
             }
         },
@@ -141,6 +142,7 @@ addLayer("money", {
                 if (hasUpgrade("money", 24)) base = base.times(1.1)
                 if (hasUpgrade("money", 34)) base = base.times(1.2)
                 if (hasUpgrade("money", 51)) base = base.times(1.5)
+                if (hasMilestone("universe", 30)) base = base.times(0.8)
                 return base
             },
             unlocked() {return hasUpgrade("money", 22)}
@@ -177,6 +179,7 @@ addLayer("money", {
                 let base = player.universe.anger.times(mulBase).pow(powBase)
                 if (hasUpgrade("money", 42)) base = base.pow(2)
                 if (hasUpgrade("money", 51)) base = base.pow(3)
+                if (hasUpgrade("sorbet", 43)) base = base.pow(2)
                 return base
             },
             unlocked() {return hasUpgrade("money", 32)}
@@ -233,6 +236,9 @@ addLayer("money", {
         if (hasMilestone("ach", 11)) base = base.times(2)
         if (hasMilestone("universe", 18)) base = base.times(player.booster.buffList[1])
         if (hasMilestone("universe", 19)) base = base.times(0.85)
+        if (hasMilestone("universe", 26)) base = base.div(4)
+        if (hasUpgrade("sorbet", 12)) base = base.times(1.5)
+        if (hasUpgrade("sorbet", 31)) base = base.times(1.5)
         return base
     },
     prestigeNotify() {
@@ -245,7 +251,8 @@ addLayer("money", {
             display() {return `Increase funding gain by ${format(this.power().times(100))}% per upgrade level. This effect stacks multiplicatively. <br><br> Cost: ${format(this.cost())} Money <br><br> Effect: ${format(this.effect())}x Funds`},
             purchaseLimit() {
                 let base = 100
-
+                if (hasUpgrade("sorbet", 33)) base = base + 50
+                if (hasUpgrade("sorbet", 44)) base = base + 50
                 return base
             },
             cost() {
@@ -266,6 +273,7 @@ addLayer("money", {
             power() {
                 let base = new Decimal(0.15)
                 if (hasUpgrade("booster", 13)) base = base.times(1.2)
+                if (hasUpgrade("sorbet", 25)) base = base.times(1.2)
                 return base
             },
             effect() {
@@ -281,6 +289,8 @@ addLayer("money", {
             purchaseLimit() {
                 let base = 70
                 if (hasMilestone("universe", 23)) base = base + 30
+                if (hasUpgrade("sorbet", 22)) base = base + 100
+                if (hasUpgrade("sorbet", 44)) base = base + 50
                 return base
             },
             cost() {
@@ -300,6 +310,8 @@ addLayer("money", {
             power() {
                 let base = new Decimal(0.045)
                 if (hasUpgrade("booster", 13)) base = base.times(1.2)
+                if (hasUpgrade("sorbet", 22)) base = base.times(1.25)
+                if (hasUpgrade("sorbet", 25)) base = base.times(1.2)
                 return base
             },
             effect() {
@@ -309,7 +321,7 @@ addLayer("money", {
             }
         }
     },
-    branches: [["booster", 2]],
+    branches: [["booster", 2], ["sorbet", 2]],
     autoUpgrade() {return hasUpgrade("booster", 24)}
     
 })

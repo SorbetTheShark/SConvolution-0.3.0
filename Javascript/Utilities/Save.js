@@ -214,6 +214,8 @@ function load() {
 	updateTemp();
 	updateTabFormats()
 	loadVue();
+
+	sounds.load()
 }
 
 function loadOptions() {

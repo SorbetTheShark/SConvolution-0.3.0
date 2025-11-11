@@ -1,5 +1,5 @@
 # ME
-- Sorbet [SOR]
+- Sorbet [SOR] (DONE)
 
 # BLACKSITE UNIVERSE
 - ColinWithClothes [CWC]
@@ -10,7 +10,7 @@
 
 # OUTSIDE BLACKSITE UNIVERSE
 - burger [BUR]
-- Pebble [PBL]
+- Pebble [PBL] (Elly)
 - Lumossity [LUM]
 
 # IRL FRIEND
