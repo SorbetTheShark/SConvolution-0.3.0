@@ -11,7 +11,6 @@ let modInfo = {
 		"Layers/Achievements.js",
 		"Layers/Booster.js",
 		"Layers/SORBET.js",
-//      "Layers/Side Layers/SIDE_TEST.js",
 
 		"layers/Side Layers/Loren.js",
 		"layers/Side Layers/Permastones.js"
