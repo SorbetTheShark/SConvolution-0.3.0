@@ -12,8 +12,8 @@ let modInfo = {
 		"Layers/Booster.js",
 		"Layers/SORBET.js",
 
-		"layers/Side Layers/Loren.js",
-		"layers/Side Layers/Permastones.js"
+		"layers/Side/Loren.js",
+		"layers/Side/Permastones.js"
 	],
 
 	discordName: "",
