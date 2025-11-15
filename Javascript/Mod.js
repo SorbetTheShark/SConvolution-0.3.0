@@ -12,8 +12,8 @@ let modInfo = {
 		"Layers/Booster.js",
 		"Layers/SORBET.js",
 
-		"layers/Side/Loren.js",
-		"layers/Side/Permastones.js"
+		"Layers/Loren.js",
+		"Layers/Permastones.js"
 	],
 
 	discordName: "",
@@ -69,6 +69,7 @@ let changelog = (
 	Permanent Milestones?! Yes please! <br>
 	Minor tweaks to something I forgor 💀 <br>
 	Left some things for the peekers to find in the files 👀 <crimson>#letstakealook</crimson><br>
+	File rearrangements <br>
 	<crimson style="text-shadow: 0 0 3px purple"> Current Endgame: 30 Destroyed Universes </crimson>`
 )
 
